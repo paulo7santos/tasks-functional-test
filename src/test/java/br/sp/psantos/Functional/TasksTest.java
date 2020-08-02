@@ -21,7 +21,7 @@ public class TasksTest {
 	 */
 	
 	public WebDriver applicationAccess() throws MalformedURLException {
-		//System.setProperty("webdriver.chrome.driver","/usr/bin/chromedriver/chromedriver");
+		System.setProperty("webdriver.chrome.driver","/usr/bin/chromedriver/chromedriver");
 		ChromeOptions chromeOptions = new ChromeOptions();
 		chromeOptions.addArguments("--headless");
         chromeOptions.addArguments("--no-sandbox");
