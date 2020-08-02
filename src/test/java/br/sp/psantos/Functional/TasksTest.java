@@ -138,9 +138,10 @@ public class TasksTest {
 			driver.findElement(By.id("addTodo")).click();
 			
 			//write the description
-			driver.findElement(By.id("task")).sendKeys("Test via Selenium");
 			
-				
+			//write the date
+			driver.findElement(By.id("dueDate")).sendKeys("15/12/2020");
+			
 			//click on Save
 			driver.findElement(By.id("saveButton")).click();
 			
