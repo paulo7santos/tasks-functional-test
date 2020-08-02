@@ -1,5 +1,7 @@
 package br.sp.psantos.Functional;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
@@ -8,6 +10,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class TasksTest {
 	
@@ -16,12 +20,15 @@ public class TasksTest {
 	 * driver.navigate().to("http://www.google.com"); }
 	 */
 	
-	public WebDriver applicationAccess() {
+	public WebDriver applicationAccess() throws MalformedURLException {
 		System.setProperty("webdriver.chrome.driver","/usr/bin/chromedriver/chromedriver");
-		ChromeOptions chromeOptions = new ChromeOptions();
-		chromeOptions.addArguments("--headless");
-        chromeOptions.addArguments("--no-sandbox");
-		WebDriver driver = new ChromeDriver(chromeOptions);
+		// ChromeOptions chromeOptions = new ChromeOptions();
+		// chromeOptions.addArguments("--headless");
+        // chromeOptions.addArguments("--no-sandbox");
+		//WebDriver driver = new ChromeDriver(chromeOptions);
+		
+		DesiredCapabilities cap = DesiredCapabilities.chrome();		
+        WebDriver driver = new RemoteWebDriver(new URL("http://192.168.0.16:4444/wd/hub"), cap);
 		driver.navigate().to("http://192.168.0.16:8001/tasks/");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return driver;
@@ -30,7 +37,7 @@ public class TasksTest {
 	
 	
 	@Test
-	public void shouldSaveTaskWithSuccess() {
+	public void shouldSaveTaskWithSuccess() throws MalformedURLException {
 		
 		WebDriver driver = applicationAccess();
 		try {
@@ -61,7 +68,7 @@ public class TasksTest {
 	}
 	
 	@Test
-	public void shouldNotSaveTaskWithoutDate() {
+	public void shouldNotSaveTaskWithoutDate() throws MalformedURLException {
 		
 		WebDriver driver = applicationAccess();
 		try {
@@ -90,7 +97,7 @@ public class TasksTest {
 	}
 	
 	@Test
-	public void shouldNotSaveTaskWithPastDate() {
+	public void shouldNotSaveTaskWithPastDate() throws MalformedURLException {
 		
 		WebDriver driver = applicationAccess();
 		try {
