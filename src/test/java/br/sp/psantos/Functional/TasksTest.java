@@ -110,7 +110,7 @@ public class TasksTest {
 			driver.findElement(By.id("task")).sendKeys("Test via Selenium");
 			
 			//write the date
-			driver.findElement(By.id("dueDate")).sendKeys("15/12/2010");
+			driver.findElement(By.id("dueDate")).sendKeys("15/12/2020");
 			
 			//click on Save
 			driver.findElement(By.id("saveButton")).click();
@@ -118,6 +118,35 @@ public class TasksTest {
 			//success message validate
 			String message = driver.findElement(By.id("message")).getText();
 			Assert.assertEquals("Due date must not be in past", message);
+			
+			//close the browser
+			driver.quit();
+		} finally {
+			//close the browser
+			driver.quit();
+		}
+		
+	}
+	
+	@Test
+	public void shouldNotSaveTaskWitoutDescription() throws MalformedURLException {
+		
+		WebDriver driver = applicationAccess();
+		try {
+			
+			//click on Add Todo
+			driver.findElement(By.id("addTodo")).click();
+			
+			//write the description
+			driver.findElement(By.id("task")).sendKeys("Test via Selenium");
+			
+				
+			//click on Save
+			driver.findElement(By.id("saveButton")).click();
+			
+			//success message validate
+			String message = driver.findElement(By.id("message")).getText();
+			Assert.assertEquals("Fill the task description", message);
 			
 			//close the browser
 			driver.quit();
