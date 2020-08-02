@@ -21,14 +21,14 @@ public class TasksTest {
 	 */
 	
 	public WebDriver applicationAccess() throws MalformedURLException {
-		//System.setProperty("webdriver.chrome.driver","/usr/bin/chromedriver/chromedriver");
-		// ChromeOptions chromeOptions = new ChromeOptions();
-		// chromeOptions.addArguments("--headless");
-        // chromeOptions.addArguments("--no-sandbox");
+		System.setProperty("webdriver.chrome.driver","/usr/bin/chromedriver/chromedriver");
+		ChromeOptions chromeOptions = new ChromeOptions();
+		chromeOptions.addArguments("--headless");
+        chromeOptions.addArguments("--no-sandbox");
 		//WebDriver driver = new ChromeDriver(chromeOptions);
 		
-		DesiredCapabilities cap = DesiredCapabilities.chrome();		
-        WebDriver driver = new RemoteWebDriver(new URL("http://192.168.0.16:4444/wd/hub"), cap);
+		//DesiredCapabilities cap = DesiredCapabilities.chrome();		
+        WebDriver driver = new RemoteWebDriver(new URL("http://192.168.0.16:4444/wd/hub"), chromeOptions);
 		driver.navigate().to("http://192.168.0.16:8001/tasks/");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return driver;
